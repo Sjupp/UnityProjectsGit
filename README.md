@@ -1,5 +1,5 @@
 # Group 5, [2D PLATFORMER NAME HERE]
-Members: Johan A, Anton L, Pether S.
+Members: Johan A, Anton L, Petter S.
 
 
 Gameplay:
