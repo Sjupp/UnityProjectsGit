@@ -3,7 +3,7 @@ Members: Johan A, Anton L, Petter S.
 
 
 Gameplay:
-You can move left and right and jump around the level.
+Core loop: Navigate through the level, solving simple puzzles to continue forward while fighting enemies.
 
 Controls:
 A = Move left
