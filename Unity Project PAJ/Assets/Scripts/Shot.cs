@@ -6,29 +6,31 @@ public class Shot : MonoBehaviour {
 
     public float speed;
 
-    private Transform player;
-    private Vector2 target;
+    Rigidbody2D rb;
+
+    private Transform target;
+    private Vector2 moveDirection;
 
 	// Use this for initialization
 	void Start () {
 
-        player = GameObject.FindGameObjectWithTag("PlayerTest").transform;
+        rb = GetComponent<Rigidbody2D>();
 
-        target = new Vector2(player.position.x, player.position.y);
+        target = GameObject.FindGameObjectWithTag("PlayerTest").transform;
+
+        moveDirection = (target.transform.position - transform.position).normalized * speed;
+        rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
 
-        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-
-        if (transform.position.x == target.x && transform.position.y == target.y)
+    
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.name == "PlayerTest")
         {
             DestroyShot();
-        }     
-		
-	}
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
