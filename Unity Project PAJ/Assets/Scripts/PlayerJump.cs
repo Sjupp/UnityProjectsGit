@@ -6,7 +6,7 @@ public class PlayerJump : MonoBehaviour
 {
     Rigidbody2D rigidbody2D;
     float jumpMaxTime;
-    float jumpTime;
+    float airTime;
     bool isJumping;
     float jumpPower;
 
@@ -21,20 +21,20 @@ public class PlayerJump : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isJumping == false)
         {
             isJumping = true;
-            jumpMaxTime = Time.time + 0.65f;
-            jumpTime = 0;
-            jumpPower = 2.4f;
+            jumpMaxTime = Time.time + 0.35f;
+            airTime = 0;
+            jumpPower = 3.6f;
         }
 
         if (Input.GetButton("Jump") && Time.time < jumpMaxTime)
         {
-            jumpTime += Time.deltaTime;
+            airTime += Time.deltaTime;
 
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, jumpPower);
 
-            if (jumpTime < 0.45)
+            if (airTime < 0.35)
             {
-                if (jumpPower < 8)
+                if (jumpPower < 6)
                     jumpPower *= 1.2f;
                 else
                     jumpPower *= 0.8f;
