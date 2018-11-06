@@ -23,7 +23,7 @@ public class PlayerJump : MonoBehaviour
             isJumping = true;
             jumpMaxTime = Time.time + 0.35f;
             airTime = 0;
-            jumpPower = 3.6f;
+            jumpPower = 5.0f;
         }
 
         if (Input.GetButton("Jump") && Time.time < jumpMaxTime)
@@ -34,7 +34,7 @@ public class PlayerJump : MonoBehaviour
 
             if (airTime < 0.35)
             {
-                if (jumpPower < 6)
+                if (jumpPower < 8)
                     jumpPower *= 1.2f;
                 else
                     jumpPower *= 0.8f;
