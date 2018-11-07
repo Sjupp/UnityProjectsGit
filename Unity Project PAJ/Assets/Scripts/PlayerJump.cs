@@ -52,4 +52,8 @@ public class PlayerJump : MonoBehaviour
     {
         isJumping = false;
     }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        isJumping = true;
+    }
 }
