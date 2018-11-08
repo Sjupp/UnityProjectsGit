@@ -9,6 +9,7 @@ public class MenuScript : MonoBehaviour {
     public GameObject Settingsbutton;
     public GameObject Aboutbutton;
     public GameObject Quitbutton;
+    public GameObject QuitPromptthing;
 
     GameObject[] menubuttons;
 
@@ -19,11 +20,6 @@ public class MenuScript : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public void ButtonPress(int arg1)
     {
         for (int i = 0; i < menubuttons.Length; i++)
@@ -31,13 +27,27 @@ public class MenuScript : MonoBehaviour {
             if (menubuttons[i] == menubuttons[arg1])
             {
                 menubuttons[i].SetActive(true);
-                Debug.Log("Button: " + menubuttons[i] + " pressed.");
+                if (menubuttons[i] == menubuttons[4])
+                {
+                    QuitPromptthing.SetActive(true);
+                }
             }
             else
             {
                 menubuttons[i].SetActive(false);
             }
         }
-        Debug.Log("1");
+    }
+
+    public void QuitPrompt(string input)
+    {
+        if (input == "yes")
+        {
+            Debug.Break();
+        }
+        else
+        {
+            QuitPromptthing.SetActive(false);
+        }
     }
 }
