@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class MenuScript : MonoBehaviour {
 
-    public GameObject HowToPlay;
+    public GameObject Startbutton;
+    public GameObject HowToPlaybutton;
+    public GameObject Settingsbutton;
+    public GameObject Aboutbutton;
+    public GameObject Quitbutton;
 
-	// Use this for initialization
-	void Start () {
-		
+    GameObject[] menubuttons;
+
+    // Use this for initialization
+    void Start () {
+
+        menubuttons =  new GameObject[] { Startbutton, HowToPlaybutton, Settingsbutton, Aboutbutton, Quitbutton};
+
 	}
 	
 	// Update is called once per frame
@@ -16,9 +24,20 @@ public class MenuScript : MonoBehaviour {
 		
 	}
 
-    public void ButtonPress()
+    public void ButtonPress(int arg1)
     {
-        HowToPlay.SetActive(true);
+        for (int i = 0; i < menubuttons.Length; i++)
+        {
+            if (menubuttons[i] == menubuttons[arg1])
+            {
+                menubuttons[i].SetActive(true);
+                Debug.Log("Button: " + menubuttons[i] + " pressed.");
+            }
+            else
+            {
+                menubuttons[i].SetActive(false);
+            }
+        }
         Debug.Log("1");
     }
 }
