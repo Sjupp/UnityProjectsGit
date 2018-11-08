@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class MenuScript : MonoBehaviour {
 
     public GameObject Startbutton;
@@ -26,7 +27,7 @@ public class MenuScript : MonoBehaviour {
 
         menubuttons =  new GameObject[] { Startbutton, HowToPlaybutton, Settingsbutton, Aboutbutton, Quitbutton};
         SubtitlesText.text = "Subtitles: disabled";
-        SettingsText.text = "Settings buttons: off";
+        SettingsText.text = "Working buttons: off";
 
     }
 	
@@ -37,7 +38,12 @@ public class MenuScript : MonoBehaviour {
             if (menubuttons[i] == menubuttons[arg1])
             {
                 menubuttons[i].SetActive(true);
-                if (menubuttons[i] == menubuttons[4])
+
+                if (menubuttons[i] == menubuttons[0])
+                {
+                    SceneManager.LoadScene(1);
+                }
+                else if (menubuttons[i] == menubuttons[4])
                 {
                     QuitPromptthing.SetActive(true);
                 }
@@ -66,12 +72,12 @@ public class MenuScript : MonoBehaviour {
     {
         if (!settings)
         {
-            SettingsText.text = "Settings buttons: more off";
+            SettingsText.text = "Working buttons: nope";
             settings = true;
         }
         else
         {
-            SettingsText.text = "Settings buttons: off";
+            SettingsText.text = "Working buttons: off";
             settings = false;
         }
     }
