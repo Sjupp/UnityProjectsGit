@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -25,14 +26,14 @@ public class PlayerMovement : MonoBehaviour
         if (x < 0)
         {
             sr.flipX = true;
-            bc.offset = new Vector2(-0.285f, 0.285f);
-            bc2.offset = new Vector2(-0.285f, 0f);
+            bc.offset = new Vector2(-0.285f, 0.32f);
+            bc2.offset = new Vector2(-0.285f, -0.05f);
         }
         if (x>0)
         {
             sr.flipX = false;
-            bc.offset = new Vector2(0.285f, 0.285f);
-            bc2.offset = new Vector2(0.285f, 0f);
+            bc.offset = new Vector2(0.285f, 0.32f);
+            bc2.offset = new Vector2(0.285f, 0.05f);
         }
     }
 
@@ -49,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.gameObject.tag.Equals("Finnish"))
         {
-
+            SceneManager.LoadScene(2);
         }
     }
     private void OnCollisionExit2D(Collision2D other)
