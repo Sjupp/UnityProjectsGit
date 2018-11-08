@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour {
 
@@ -9,21 +11,25 @@ public class MenuScript : MonoBehaviour {
     public GameObject Settingsbutton;
     public GameObject Aboutbutton;
     public GameObject Quitbutton;
+    public GameObject QuitPromptthing;
 
     GameObject[] menubuttons;
+
+    public Text SettingsText;
+    bool settings = false;
+
+    public Text SubtitlesText;
+    bool subtitles = false;
 
     // Use this for initialization
     void Start () {
 
         menubuttons =  new GameObject[] { Startbutton, HowToPlaybutton, Settingsbutton, Aboutbutton, Quitbutton};
+        SubtitlesText.text = "Subtitles: disabled";
+        SettingsText.text = "Settings buttons: off";
 
-	}
+    }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public void ButtonPress(int arg1)
     {
         for (int i = 0; i < menubuttons.Length; i++)
@@ -31,13 +37,56 @@ public class MenuScript : MonoBehaviour {
             if (menubuttons[i] == menubuttons[arg1])
             {
                 menubuttons[i].SetActive(true);
-                Debug.Log("Button: " + menubuttons[i] + " pressed.");
+                if (menubuttons[i] == menubuttons[4])
+                {
+                    QuitPromptthing.SetActive(true);
+                }
             }
             else
             {
                 menubuttons[i].SetActive(false);
             }
         }
-        Debug.Log("1");
+    }
+
+    public void QuitPrompt(string input)
+    {
+        if (input == "yes")
+        {
+            Debug.Break();
+        }
+        else
+        {
+            QuitPromptthing.SetActive(false);
+            menubuttons[4].SetActive(false);
+        }
+    }
+
+    public void Settings()
+    {
+        if (!settings)
+        {
+            SettingsText.text = "Settings buttons: more off";
+            settings = true;
+        }
+        else
+        {
+            SettingsText.text = "Settings buttons: off";
+            settings = false;
+        }
+    }
+
+    public void Subtitles()
+    {
+        if (!subtitles)
+        {
+            SubtitlesText.text = "Subtitles: enabled";
+            subtitles = true;
+        }
+        else
+        {
+            SubtitlesText.text = "Subtitles: disabled";
+            subtitles = false;
+        }
     }
 }
