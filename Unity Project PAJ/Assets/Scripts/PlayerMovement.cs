@@ -5,20 +5,35 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5;
-    Rigidbody2D Rigidbody2D;
+    Rigidbody2D rb;
     public Animator anim;
+    public SpriteRenderer sr;
+    public BoxCollider2D bc;
+    public BoxCollider2D bc2;
 
     void Start()
     {
-        Rigidbody2D = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
 
     void Update()
     {
         float x = Input.GetAxisRaw("Horizontal") * speed;
-        Rigidbody2D.velocity = (new Vector2(x, Rigidbody2D.velocity.y));
+        rb.velocity = (new Vector2(x, rb.velocity.y));
         anim.SetFloat("Speed", Mathf.Abs(x));
+        if (x < 0)
+        {
+            sr.flipX = true;
+            bc.offset = new Vector2(-0.285f, 0.285f);
+            bc2.offset = new Vector2(-0.285f, 0f);
+        }
+        if (x>0)
+        {
+            sr.flipX = false;
+            bc.offset = new Vector2(0.285f, 0.285f);
+            bc2.offset = new Vector2(0.285f, 0f);
+        }
     }
 
 
@@ -28,6 +43,10 @@ public class PlayerMovement : MonoBehaviour
         {
             this.transform.parent = other.transform;
         }
+        if (other.gameObject.tag.Equals("Death"))
+        {
+            this.transform.position = new Vector3(-6f, -3.5f, -0.1f);
+        }       
     }
     private void OnCollisionExit2D(Collision2D other)
     {
