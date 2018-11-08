@@ -11,6 +11,7 @@ public class PlayerJump : MonoBehaviour
     bool nudge;
     float jumpPower;
     public Animator anim;
+    public AudioSource jump;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class PlayerJump : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && isJumping == false)
         {
+            jump.Play();
             jumpMaxTime = Time.time + 0.3f;
             airTime = 0;
             jumpPower = 5.0f;
