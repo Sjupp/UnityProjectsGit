@@ -46,7 +46,11 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag.Equals("Death"))
         {
             this.transform.position = new Vector3(-6f, -3.5f, -0.1f);
-        }       
+        }
+        if (other.gameObject.tag.Equals("Finnish"))
+        {
+
+        }
     }
     private void OnCollisionExit2D(Collision2D other)
     {

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerTest
   - Death
+  - Finnish
   layers:
   - Default
   - TransparentFX
