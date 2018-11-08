@@ -8,6 +8,7 @@ public class PlayerJump : MonoBehaviour
     float jumpMaxTime;
     float airTime;
     bool isJumping;
+    bool nudge;
     float jumpPower;
     public Animator anim;
 
@@ -21,8 +22,7 @@ public class PlayerJump : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && isJumping == false)
         {
-            isJumping = true;
-            jumpMaxTime = Time.time + 0.35f;
+            jumpMaxTime = Time.time + 0.3f;
             airTime = 0;
             jumpPower = 5.0f;
         }
@@ -33,7 +33,7 @@ public class PlayerJump : MonoBehaviour
 
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
 
-            if (airTime < 0.35)
+            if (airTime < 0.15)
             {
                 if (jumpPower < 8)
                     jumpPower *= 1.2f;
@@ -47,12 +47,19 @@ public class PlayerJump : MonoBehaviour
         {
             jumpMaxTime = 0;
         }
+
+        if (Input.GetButtonDown("Fire1") && nudge)
+        {
+            rb.AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
+            nudge = false;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         isJumping = false;
         anim.SetBool("Jumping", false);
+        nudge = true;
     }
     void OnTriggerExit2D(Collider2D other)
     {

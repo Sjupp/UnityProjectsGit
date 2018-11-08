@@ -27,13 +27,13 @@ public class PlayerMovement : MonoBehaviour
         {
             sr.flipX = true;
             bc.offset = new Vector2(-0.285f, 0.32f);
-            bc2.offset = new Vector2(-0.285f, -0.05f);
+            bc2.offset = new Vector2(-0.285f, -0.075f);
         }
         if (x>0)
         {
             sr.flipX = false;
             bc.offset = new Vector2(0.285f, 0.32f);
-            bc2.offset = new Vector2(0.285f, 0.05f);
+            bc2.offset = new Vector2(0.285f, 0.075f);
         }
     }
 
@@ -46,7 +46,14 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.gameObject.tag.Equals("Death"))
         {
-            this.transform.position = new Vector3(-6f, -3.5f, -0.1f);
+            if (transform.position.x < 50)
+            {
+                this.transform.position = new Vector3(-6f, -3.5f, -0.1f);
+            }
+            if (transform.position.x >= 50 && transform.position.x < 137)
+            {
+                this.transform.position = new Vector3(50.75f, 0.5f, -0.1f);
+            }
         }
         if (other.gameObject.tag.Equals("Finnish"))
         {
