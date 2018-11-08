@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5;
     Rigidbody2D Rigidbody2D;
+    public Animator anim;
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float x = Input.GetAxisRaw("Horizontal") * speed;
         Rigidbody2D.velocity = (new Vector2(x, Rigidbody2D.velocity.y));
+        anim.SetFloat("Speed", Mathf.Abs(x));
     }
 
 

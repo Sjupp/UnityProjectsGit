@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
-    Rigidbody2D rigidbody2D;
+    Rigidbody2D rb;
     float jumpMaxTime;
     float airTime;
     bool isJumping;
     float jumpPower;
+    public Animator anim;
 
     void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        rigidbody2D.gravityScale = 2;
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 2;
     }
 
     void Update()
@@ -30,7 +31,7 @@ public class PlayerJump : MonoBehaviour
         {
             airTime += Time.deltaTime;
 
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, jumpPower);
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
 
             if (airTime < 0.35)
             {
@@ -48,12 +49,14 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         isJumping = false;
+        anim.SetBool("Jumping", false);
     }
-    private void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
         isJumping = true;
+        anim.SetBool("Jumping", true);
     }
 }
