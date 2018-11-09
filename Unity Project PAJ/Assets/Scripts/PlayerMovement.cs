@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -24,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+<<<<<<< HEAD
         movement = Input.GetAxisRaw("Horizontal") * speed;
         rb.velocity = (new Vector2(movement * Time.fixedDeltaTime, rb.velocity.y));
         anim.SetFloat("Speed", Mathf.Abs(movement));
@@ -32,6 +32,24 @@ public class PlayerMovement : MonoBehaviour
             Flip();
         else if (movement < 0 && facingRight)
             Flip();
+=======
+        float x = Input.GetAxisRaw("Horizontal") * speed;
+        rb.velocity = (new Vector2(x, rb.velocity.y));
+        anim.SetFloat("Speed", Mathf.Abs(x));
+        if (x < 0)
+        {
+            sr.flipX = true;
+            bc.offset = new Vector2(-0.285f, 0.285f);
+            bc2.offset = new Vector2(-0.285f, 0f);
+        }
+        if (x>0)
+        {
+            sr.flipX = false;
+            bc.offset = new Vector2(0.285f, 0.285f);
+            bc2.offset = new Vector2(0.285f, 0f);
+        }
+    }
+>>>>>>> parent of e0cfe56... Added menu music and tweaked player movement
 
         if (damaged == true)
             Hurt();
@@ -62,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.tag.Equals("Finnish"))
         {
-            SceneManager.LoadScene(2);
+
         }
     }
 
