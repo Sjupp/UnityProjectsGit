@@ -5,15 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5;
+
     Rigidbody2D rb;
-    public bool damaged;
+    float speed = 250;
+    bool facingRight = true;
+    bool damaged;
+    float movement;
     float damagedTimer;
     float dif;
     public Animator anim;
     public SpriteRenderer sr;
-    public BoxCollider2D bc;
-    public BoxCollider2D bc2;
     public AudioSource pain;
 
     void Start()
@@ -21,64 +22,19 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-
-    void Update()
+    void FixedUpdate()
     {
-        float x = Input.GetAxisRaw("Horizontal") * speed;
-        rb.velocity = (new Vector2(x, rb.velocity.y));
-        anim.SetFloat("Speed", Mathf.Abs(x));
+        movement = Input.GetAxisRaw("Horizontal") * speed;
+        rb.velocity = (new Vector2(movement * Time.fixedDeltaTime, rb.velocity.y));
+        anim.SetFloat("Speed", Mathf.Abs(movement));
 
-        if (x < 0)
-        {
-            sr.flipX = true;
-            bc.offset = new Vector2(-0.285f, 0.32f);
-            bc2.offset = new Vector2(-0.285f, -0.075f);
-        }
-        if (x > 0)
-        {
-            sr.flipX = false;
-            bc.offset = new Vector2(0.285f, 0.32f);
-            bc2.offset = new Vector2(0.285f, 0.075f);
-        }
+        if (movement > 0 && !facingRight)
+            Flip();
+        else if (movement < 0 && facingRight)
+            Flip();
 
         if (damaged == true)
-        {
-            dif += Time.deltaTime;
-
-            if (dif - damagedTimer < 0.1)
-                sr.color = new Vector4(255, 255, 255, 0);
-            else if (dif - damagedTimer < 0.2)
-                sr.color = new Vector4(255, 255, 255, 255);
-            else if (dif - damagedTimer < 0.3)
-                sr.color = new Vector4(255, 255, 255, 0);
-            else if (dif - damagedTimer < 0.4)
-                sr.color = new Vector4(255, 255, 255, 255);
-            else if (dif - damagedTimer < 0.5)
-                sr.color = new Vector4(255, 255, 255, 0);
-            else if (dif - damagedTimer < 0.6)
-                sr.color = new Vector4(255, 255, 255, 255);
-            else if (dif - damagedTimer < 0.7)
-                sr.color = new Vector4(255, 255, 255, 0);
-            else if (dif - damagedTimer < 0.8)
-                sr.color = new Vector4(255, 255, 255, 255);
-            else if (dif - damagedTimer < 0.9)
-                sr.color = new Vector4(255, 255, 255, 0);
-            else if (dif - damagedTimer < 1.0)
-                sr.color = new Vector4(255, 255, 255, 255);
-            else if (dif - damagedTimer < 1.1)
-                sr.color = new Vector4(255, 255, 255, 255);
-            else if (dif - damagedTimer < 1.2)
-                sr.color = new Vector4(255, 255, 255, 0);
-            else if (dif - damagedTimer < 1.3)
-                sr.color = new Vector4(255, 255, 255, 255);
-            else if (dif - damagedTimer < 1.4)
-                sr.color = new Vector4(255, 255, 255, 0);
-            else if (dif - damagedTimer < 1.5)
-                sr.color = new Vector4(255, 255, 255, 255);
-
-            if (dif - damagedTimer > 1.5)
-                damaged = false;
-        }
+            Hurt();
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -116,5 +72,53 @@ public class PlayerMovement : MonoBehaviour
         {
             this.transform.parent = null;
         }
+    }
+
+    void Flip()
+    {
+        facingRight = !facingRight;
+
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
+
+    void Hurt()
+    {
+        dif += Time.deltaTime;
+
+        if (dif - damagedTimer < 0.1)
+            sr.color = new Vector4(255, 255, 255, 0);
+        else if (dif - damagedTimer < 0.2)
+            sr.color = new Vector4(255, 255, 255, 255);
+        else if (dif - damagedTimer < 0.3)
+            sr.color = new Vector4(255, 255, 255, 0);
+        else if (dif - damagedTimer < 0.4)
+            sr.color = new Vector4(255, 255, 255, 255);
+        else if (dif - damagedTimer < 0.5)
+            sr.color = new Vector4(255, 255, 255, 0);
+        else if (dif - damagedTimer < 0.6)
+            sr.color = new Vector4(255, 255, 255, 255);
+        else if (dif - damagedTimer < 0.7)
+            sr.color = new Vector4(255, 255, 255, 0);
+        else if (dif - damagedTimer < 0.8)
+            sr.color = new Vector4(255, 255, 255, 255);
+        else if (dif - damagedTimer < 0.9)
+            sr.color = new Vector4(255, 255, 255, 0);
+        else if (dif - damagedTimer < 1.0)
+            sr.color = new Vector4(255, 255, 255, 255);
+        else if (dif - damagedTimer < 1.1)
+            sr.color = new Vector4(255, 255, 255, 255);
+        else if (dif - damagedTimer < 1.2)
+            sr.color = new Vector4(255, 255, 255, 0);
+        else if (dif - damagedTimer < 1.3)
+            sr.color = new Vector4(255, 255, 255, 255);
+        else if (dif - damagedTimer < 1.4)
+            sr.color = new Vector4(255, 255, 255, 0);
+        else if (dif - damagedTimer < 1.5)
+            sr.color = new Vector4(255, 255, 255, 255);
+
+        if (dif - damagedTimer > 1.5)
+            damaged = false;
     }
 }

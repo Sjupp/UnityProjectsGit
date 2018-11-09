@@ -5911,10 +5911,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LookaheadTime: 0.4
+  m_LookaheadTime: 0.75
   m_LookaheadSmoothing: 10
   m_LookaheadIgnoreY: 1
-  m_XDamping: 1
+  m_XDamping: 3
   m_YDamping: 1
   m_ZDamping: 1
   m_ScreenX: 0.5
@@ -5923,7 +5923,7 @@ MonoBehaviour:
   m_DeadZoneWidth: 0.2
   m_DeadZoneHeight: 0.1
   m_DeadZoneDepth: 0
-  m_UnlimitedSoftZone: 0
+  m_UnlimitedSoftZone: 1
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
@@ -12266,7 +12266,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &1479739493
 MonoBehaviour:
@@ -12294,12 +12294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a4c1be3cf329d41a349e6bb3cbdcf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  damaged: 0
   anim: {fileID: 1479739496}
   sr: {fileID: 1479739495}
-  bc: {fileID: 1479739491}
-  bc2: {fileID: 1479739490}
   pain: {fileID: 780452960}
 --- !u!212 &1479739495
 SpriteRenderer:
