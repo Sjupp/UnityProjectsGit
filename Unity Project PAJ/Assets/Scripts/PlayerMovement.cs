@@ -7,19 +7,22 @@ public class PlayerMovement : MonoBehaviour
 {
 
     Rigidbody2D rb;
-    float speed = 250;
+    Animator anim;
+    SpriteRenderer sr;
+    AudioSource pain;
     bool facingRight = true;
     bool damaged;
+    float speed = 250;
     float movement;
     float damagedTimer;
     float dif;
-    public Animator anim;
-    public SpriteRenderer sr;
-    public AudioSource pain;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+        pain = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
