@@ -1,4 +1,4 @@
-# Group 5, [[2D PLATFORMER NAME HERE]]
+# Group 5, Chad, the Rad Lad!
 Members: Johan A, Anton L, Petter S.
 
 
